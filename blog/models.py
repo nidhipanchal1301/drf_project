@@ -10,7 +10,7 @@ class Post(models.Model):
     author = models.ForeignKey(User, related_name="posts", on_delete=models.CASCADE)
     title = models.CharField(max_length=200, db_index=True)  
     content = models.TextField()
-    image = models.ImageField(upload_to="posts/", null=True, blank=True)
+    image = models.ImageField(upload_to='images/')
     tags = models.ManyToManyField(Tag, related_name="posts", blank=True)
     created_at = models.DateTimeField(auto_now_add=True, db_index=True)
     updated_at = models.DateTimeField(auto_now=True)

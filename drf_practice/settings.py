@@ -197,3 +197,5 @@ CACHES = {
 }
 
 
+MEDIA_ROOT = r"C:\Users\Nidhi Panchal\media_files"
+MEDIA_URL = "/media/"

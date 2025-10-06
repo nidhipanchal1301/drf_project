@@ -1,0 +1,40 @@
+[
+  {
+    "model": "blog.tag",
+    "pk": 1,
+    "fields": {
+      "name": "Django"
+    }
+  },
+  {
+    "model": "blog.tag",
+    "pk": 2,
+    "fields": {
+      "name": "API"
+    }   
+  },
+  {
+    "model": "blog.post",
+    "pk": 1,
+    "fields": {
+      "author": 1,
+      "title": "Hello Django Fixtures",
+      "content": "This post was created using a fixture!",
+      "image": null,
+      "tags": [1, 2],
+      "created_at": "2025-10-03T12:00:00Z",
+      "updated_at": "2025-10-03T12:10:00Z"
+    }
+  },
+  {
+    "model": "blog.comment",
+    "pk": 1,
+    "fields": {
+      "post": 1,
+      "author": 1,
+      "content": "Wow, fixtures are cool!",
+      "parent": null,
+      "created_at": "2025-10-03T12:15:00Z"
+    }
+  }
+]

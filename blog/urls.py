@@ -24,16 +24,18 @@ router.register(r"tags", TagViewSet, basename="tag")
 
 urlpatterns = [
     path("hello/", hello_world, name="hello"),
-    path("posts-mixins/", PostListCreateMixins.as_view(), name="posts-mixins"),
-    path("posts/<int:pk>/detail/", PostDetailAPIView.as_view(), name="post-detail-apiview"),
+    path("mixins/", PostListCreateMixins.as_view(), name="posts-mixins"),
+    path("<int:pk>/detail/", PostDetailAPIView.as_view(), name="post-detail-apiview"),
     path("cached-posts/", CachedPostListAPIView.as_view(), name="cached-posts"),
-    path('analytics/', AnalyticsAPIView.as_view(), name='analytics'),
-    
-    # CRUD endpoints for generic apiview
-    path("posts/", PostListAPIView.as_view(), name="post-list"),
-    path("posts/create/", PostCreateAPIView.as_view(), name="post-create"),
-    path("posts/<int:pk>/", PostRetrieveAPIView.as_view(), name="post-detail"),
-    path("posts/<int:pk>/update/", PostUpdateAPIView.as_view(), name="post-update"),
-    path("posts/<int:pk>/delete/", PostDeleteAPIView.as_view(), name="post-delete"),
+    path("analytics/", AnalyticsAPIView.as_view(), name="analytics"),
+
+    # CRUD endpoints for generic APIViews
+    path("list/", PostListAPIView.as_view(), name="post-list"),
+    path("create/", PostCreateAPIView.as_view(), name="post-create"),
+    path("<int:pk>/", PostRetrieveAPIView.as_view(), name="post-detail"),
+    path("<int:pk>/update/", PostUpdateAPIView.as_view(), name="post-update"),
+    path("<int:pk>/delete/", PostDeleteAPIView.as_view(), name="post-delete"),
+
+    # Router URLs
     path("", include(router.urls)),
 ]

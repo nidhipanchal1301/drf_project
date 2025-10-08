@@ -18,7 +18,6 @@ from ..pagination import StandardResultsSetPagination
 from ..throttling import TenPerHourUserThrottle
 
 
-# -------------------- POST DETAIL --------------------
 @method_decorator(csrf_exempt, name='dispatch')
 class PostDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
@@ -27,7 +26,6 @@ class PostDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     parser_classes = [JSONParser, FormParser, MultiPartParser]
 
 
-# -------------------- LIST & CREATE --------------------
 class PostListCreateMixins(mixins.ListModelMixin, mixins.CreateModelMixin, generics.GenericAPIView):
     queryset = Post.objects.select_related("author").prefetch_related("tags", "comments").only("id", "title", "author", "created_at")
     serializer_class = PostSerializer
@@ -42,7 +40,6 @@ class PostListCreateMixins(mixins.ListModelMixin, mixins.CreateModelMixin, gener
         return self.create(request, *args, **kwargs)
 
 
-# -------------------- LIST API WITH ANNOTATIONS --------------------
 @method_decorator(cache_page(60), name='dispatch')
 class PostListAPIView(generics.ListAPIView):
     serializer_class = PostSerializer
@@ -76,7 +73,6 @@ class PostListAPIView(generics.ListAPIView):
         )
 
 
-# -------------------- CREATE API --------------------
 @method_decorator(cache_page(60), name='dispatch')
 class PostCreateAPIView(generics.CreateAPIView):
     queryset = Post.objects.select_related("author").prefetch_related("tags", "comments").all()
@@ -84,14 +80,12 @@ class PostCreateAPIView(generics.CreateAPIView):
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-# -------------------- RETRIEVE API --------------------
 class PostRetrieveAPIView(generics.RetrieveAPIView):
     queryset = Post.objects.select_related("author").prefetch_related("tags", "comments").all()
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-# -------------------- UPDATE API --------------------
 class PostUpdateAPIView(generics.UpdateAPIView):
     queryset = Post.objects.select_related("author").prefetch_related("tags", "comments").all()
     serializer_class = PostSerializer
@@ -101,14 +95,12 @@ class PostUpdateAPIView(generics.UpdateAPIView):
         serializer.save(author=self.request.user)
 
 
-# -------------------- DELETE API --------------------
 class PostDeleteAPIView(generics.DestroyAPIView):
     queryset = Post.objects.all().only("id")
     serializer_class = PostSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
-# -------------------- VIEWSET --------------------
 @method_decorator(csrf_exempt, name="dispatch")
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.select_related("author").prefetch_related("tags", "comments").defer("content", "image").all()
@@ -133,7 +125,6 @@ class PostViewSet(viewsets.ModelViewSet):
         return Response(PostSerializer(post, context={"request": request}).data)
 
 
-# -------------------- CACHED LIST API --------------------
 @method_decorator(cache_page(60), name='dispatch')
 class CachedPostListAPIView(generics.ListAPIView):
     queryset = Post.objects.select_related("author").prefetch_related("tags").all()

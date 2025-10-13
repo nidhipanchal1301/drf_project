@@ -2,7 +2,7 @@ from rest_framework.routers import DefaultRouter
 from django.urls import path, include
 
 from .views import (
-    hello_world,
+    api_status,
     PostDetailAPIView,
     PostListCreateMixins,
     PostViewSet,
@@ -23,7 +23,7 @@ router.register(r"comments", CommentViewSet, basename="comment")
 router.register(r"tags", TagViewSet, basename="tag")
 
 urlpatterns = [
-    path("hello/", hello_world, name="hello"),
+    path("status/", api_status, name="api-status"),
     path("mixins/", PostListCreateMixins.as_view(), name="posts-mixins"),
     path("<int:pk>/detail/", PostDetailAPIView.as_view(), name="post-detail-apiview"),
     path("cached-posts/", CachedPostListAPIView.as_view(), name="cached-posts"),

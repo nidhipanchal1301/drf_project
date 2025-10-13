@@ -185,7 +185,7 @@ REST_FRAMEWORK = {
 
 
     "DEFAULT_PAGINATION_CLASS": "blog.pagination.StandardResultsSetPagination",
-    "PAGE_SIZE": 50,
+    "PAGE_SIZE": 500,
 }
 
 
@@ -199,3 +199,6 @@ CACHES = {
 
 MEDIA_ROOT = r"C:\Users\Nidhi Panchal\media_files"
 MEDIA_URL = "/media/"
+
+
+AUTH_USER_MODEL = "users.User"

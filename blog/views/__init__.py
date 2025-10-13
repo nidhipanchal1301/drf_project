@@ -1,6 +1,6 @@
 from .AnalyticsViews import AnalyticsAPIView
 from .CommentViews import CommentViewSet
-from .GeneralViews import hello_world
+from .GeneralViews import api_status
 from .PostViews import (
     PostDetailAPIView,
     PostListCreateMixins,

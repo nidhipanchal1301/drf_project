@@ -13,6 +13,11 @@ env/
 
 # VS Code
 .vscode/
+.idea/
 
 # Migrations cache
 */migrations/__pycache__/
+
+
+# Environment variables
+.env

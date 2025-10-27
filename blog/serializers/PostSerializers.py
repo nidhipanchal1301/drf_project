@@ -23,22 +23,8 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = (
-            "id",
-            "author",
-            "title",
-            "content",
-            "image",
-            "tags",
-            "tag_ids",
-            "comments",
-            "created_at",
-            "comment_count",
-            "has_image",
-            "has_comments",
-            "latest_comment",
-            "doubled_title_len",
-        )
+        fields = ("id", "author", "title", "content", "image", "tags", "tag_ids", "comments", "created_at", "comment_count", 
+                  "has_image", "has_comments", "latest_comment", "doubled_title_len", )
         read_only_fields = ["author"]
 
     def create(self, validated_data):

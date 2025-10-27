@@ -1,21 +1,10 @@
 from rest_framework.routers import DefaultRouter
+
 from django.urls import path, include
 
-from .views import (
-    api_status,
-    PostDetailAPIView,
-    PostListCreateMixins,
-    PostViewSet,
-    CommentViewSet,
-    TagViewSet,
-    PostListAPIView,
-    PostCreateAPIView,
-    PostRetrieveAPIView,
-    PostUpdateAPIView,
-    PostDeleteAPIView,
-    AnalyticsAPIView,
-    CachedPostListAPIView,
-)
+from .views import (api_status, PostDetailAPIView, PostListCreateMixins, PostViewSet, CommentViewSet, TagViewSet, PostListAPIView,
+                    PostCreateAPIView, PostRetrieveAPIView, PostUpdateAPIView, PostDeleteAPIView, AnalyticsAPIView, CachedPostListAPIView, )
+
 
 router = DefaultRouter()
 router.register(r"posts", PostViewSet, basename="post")

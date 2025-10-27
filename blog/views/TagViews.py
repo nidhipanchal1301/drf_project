@@ -5,6 +5,7 @@ from rest_framework.response import Response
 from ..models import Tag, Post, Comment
 from ..serializers import TagSerializer, CommentSerializer
 
+
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all().only("id", "name")
     serializer_class = TagSerializer

@@ -1,13 +1,18 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
+
 from django.db.models import Count,  OuterRef, Subquery, Exists, Case, When, Value, BooleanField
 from django.contrib.postgres.aggregates import ArrayAgg
+
 from ..models import Post, Comment, Tag
+
 from django.contrib.auth import get_user_model
+
 
 User = get_user_model()
 
 class AnalyticsAPIView(APIView): 
+
     def get(self, request):
         posts_per_author = (
             User.objects.annotate(

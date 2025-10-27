@@ -3,6 +3,7 @@ from rest_framework.test import APITestCase, APIClient
 from django.contrib.auth.models import User
 from .models import Post
 
+
 class PostAPITestCase(APITestCase):
     def setUp(self):
         self.user = User.objects.create_user(username="tester", password="pass123")

@@ -18,14 +18,17 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path, include
+
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
+from rest_framework import permissions
+
 from django.conf import settings
 from django.conf.urls.static import static
 
-from rest_framework import permissions
 from drf_yasg.views import get_schema_view
 from drf_yasg import openapi
+
 
 schema_view = get_schema_view(
    openapi.Info(title="DRF Playground API", default_version="v1",

@@ -1,6 +1,7 @@
 from django.core.management.base import BaseCommand
 from blog.models import Tag
 
+
 class Command(BaseCommand):
     help = "Create 1000+ tags with names django1, django2, ..."
 

@@ -1,9 +1,9 @@
-# CommentsViews.py
 from rest_framework import viewsets
 from django.shortcuts import get_object_or_404
 from ..models import Comment, Post
 from ..serializers import CommentSerializer
 from ..permissions import IsOwnerOrReadOnly
+
 
 class CommentViewSet(viewsets.ModelViewSet):
     queryset = Comment.objects.select_related("post").all()

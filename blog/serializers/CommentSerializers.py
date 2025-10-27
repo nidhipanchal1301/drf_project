@@ -8,7 +8,7 @@ class RecursiveField(serializers.Serializer):
 
 class CommentSerializer(serializers.ModelSerializer):
     replies = RecursiveField(many=True, read_only=True)
-    author = serializers.StringRelatedField(read_only=True)
+    author = serializers.CharField(read_only=True)
 
     class Meta:
         model = Comment

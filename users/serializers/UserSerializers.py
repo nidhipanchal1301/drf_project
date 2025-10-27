@@ -9,3 +9,11 @@ class UserSerializer(serializers.ModelSerializer):
             "is_verified", "is_staff", "is_active", "created_at", "updated_at",
         ]
         read_only_fields = ["is_staff", "is_active", "created_at", "updated_at"]
+
+        
+    # only admins can assign roles
+    def validate_role(self, value):
+        request = self.context.get("request")
+        if request and not (request.user and request.user.is_authenticated and request.user.is_admin):
+            raise serializers.ValidationError("Only admins can change role.")
+        return value

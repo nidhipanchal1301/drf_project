@@ -39,6 +39,7 @@ class PostSerializer(serializers.ModelSerializer):
             "latest_comment",
             "doubled_title_len",
         )
+        read_only_fields = ["author"]
 
     def create(self, validated_data):
         tags = validated_data.pop("tags", ())

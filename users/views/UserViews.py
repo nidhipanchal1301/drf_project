@@ -28,3 +28,10 @@ class UserViewSet(viewsets.ModelViewSet):
         user.profile_image = file_obj
         user.save()
         return Response(UserSerializer(user, context={"request": request}).data)
+
+
+    from rest_framework import permissions
+    class IsAuthorOrAdmin(permissions.BasePermission):
+        def has_permission(self, request, view):
+            return bool(request.user and request.user.is_authenticated and (request.user.is_author or request.user.is_admin))
+    permission_classes = [IsAuthorOrAdmin]

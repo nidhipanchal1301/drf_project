@@ -202,3 +202,11 @@ MEDIA_URL = "/media/"
 
 
 AUTH_USER_MODEL = "users.User"
+
+
+
+
+# {
+#   "username": "nidhi",
+#   "password": "Nidhi@1312"
+# }

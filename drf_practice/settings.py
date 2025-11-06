@@ -41,9 +41,12 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'drf_yasg',
-    'users',
+    # 'users',
     'blog',
-]
+    'debug_toolbar',
+    'users.apps.UsersConfig',
+    # 'django_crontab',
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -53,6 +56,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+
 ]
 
 CSRF_FAILURE_VIEW = 'django.views.csrf.csrf_failure'
@@ -158,13 +163,15 @@ REST_FRAMEWORK = {
     ),
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework.authentication.SessionAuthentication",
-        "rest_framework.authentication.BasicAuthentication",
-        "rest_framework.authentication.TokenAuthentication",
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
         "rest_framework_simplejwt.authentication.JWTAuthentication",                                                                  
     ),
     "DEFAULT_PERMISSION_CLASSES": (
         "rest_framework.permissions.IsAuthenticatedOrReadOnly",
-        'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticated',
+        "rest_framework.permissions.AllowAny",
+
     ),
     "DEFAULT_THROTTLE_CLASSES": (
         "rest_framework.throttling.AnonRateThrottle",
@@ -188,6 +195,7 @@ REST_FRAMEWORK = {
 
     "DEFAULT_PAGINATION_CLASS": "blog.pagination.StandardResultsSetPagination",
     "PAGE_SIZE": 500,
+
 }
 
 
@@ -206,9 +214,33 @@ MEDIA_URL = "/media/"
 AUTH_USER_MODEL = "users.User"
 
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
+
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'needhi1312@gmail.com'  
+EMAIL_HOST_PASSWORD = 'jxxa ysid lswf dxnf'  
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+
+
+APPEND_SLASH = False
+
+# CRONJOBS = [
+#     ('*/1 * * * *', 'blog.cron.my_scheduled_task'), 
+# ]
 
 
 # {
 #   "username": "nidhi",
-#   "password": "Nidhi@1312"
+#   "password": "123"
 # }
+
+
+
+# app password - jxxa ysid lswf dxnf

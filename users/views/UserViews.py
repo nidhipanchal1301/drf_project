@@ -4,13 +4,19 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticated
 
 from ..models import User
+
 from ..serializers.UserSerializers import UserSerializer
+
+from django_filters.rest_framework import DjangoFilterBackend
+
 
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated]
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['is_active']
 
     @action(detail=True, methods=["post"])
     def soft_delete(self, request, pk=None):

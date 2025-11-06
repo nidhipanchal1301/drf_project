@@ -1,17 +1,31 @@
 from rest_framework import serializers
+
 from ..models import Comment
 
+from django.contrib.auth import get_user_model
 
-class RecursiveField(serializers.Serializer):
-    
-    def to_representation(self, value):
-        serializer = self.parent.parent.__class__(value, context=self.context)
-        return serializer.data
+User = get_user_model()
 
-class CommentSerializer(serializers.ModelSerializer):
-    replies = RecursiveField(many=True, read_only=True)
-    author = serializers.CharField(read_only=True)
+
+
+class UserDisplaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ("id", "username")
+
+
+class CommentChildSerializer(serializers.ModelSerializer):
+    author = UserDisplaySerializer(read_only=True)
 
     class Meta:
         model = Comment
-        fields = ("id", "author", "content", "parent", "replies", "created_at")
+        fields = ("id", "author", "content", "created_at")
+        
+
+class CommentSerializer(serializers.ModelSerializer):
+    author = UserDisplaySerializer(read_only=True)
+
+    class Meta:
+        model = Comment
+        fields = ("id", "author", "content", "created_at")
+        read_only_fields = ()

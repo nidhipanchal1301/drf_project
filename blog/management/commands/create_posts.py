@@ -1,10 +1,13 @@
 from django.core.management.base import BaseCommand
+
 from django.contrib.auth import get_user_model
+
 from blog.models import Post, Tag, Comment
 
 
+
 class Command(BaseCommand):
-    help = "Create a large number of posts with tags and limited total comments"
+    help = "Create_posts"
 
     def add_arguments(self, parser):
         parser.add_argument(

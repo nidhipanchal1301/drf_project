@@ -43,14 +43,23 @@ urlpatterns = [
     path("api/users/", include("users.urls")),
     # For auth
     path("api-token-auth/", obtain_auth_token, name="api_token_auth"),  
-    path("api/token/", TokenObtainPairView.as_view(), name="token_obtain_pair"),
+    path("api/token", TokenObtainPairView.as_view(), name="token_obtain_pair"),
     path("api/token/refresh/", TokenRefreshView.as_view(), name="token_refresh"),
+    path("api/auth/", include("users.urls")),
+    path("api/users/", include("users.urls")),
 
+    
 
     # For login (Session auth)
-    path("api-auth/", include("rest_framework.urls", namespace="rest_framework")),
+    path("api-auth", include("rest_framework.urls", namespace="rest_framework")),
 
 ]
 
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+if settings.DEBUG:
+    urlpatterns += [
+        path('__debug__/', include('debug_toolbar.urls')),
+    ]

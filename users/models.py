@@ -1,5 +1,37 @@
-from django.contrib.auth.models import AbstractUser
+from django.contrib.auth.models import AbstractUser,BaseUserManager
 from django.db import models
+
+
+
+class UserManager(BaseUserManager):
+    def active_users(self):
+        return self.filter(is_active=True)
+
+    def inactive_users(self):
+        return self.filter(is_active=False)
+
+    def verified_users(self):
+        return self.filter(is_verified=True)
+
+    def unverified_users(self):
+        return self.filter(is_verified=False)
+
+    # Role-based filters
+    def admins(self):
+        return self.filter(role='admin')
+
+    def authors(self):
+        return self.filter(role='author')
+
+    def moderators(self):
+        return self.filter(role='moderator')
+
+    def editors(self):
+        return self.filter(role='editor')
+
+    def customers(self):
+        return self.filter(role='customer')
+    
 
 
 class User(AbstractUser):
@@ -26,6 +58,8 @@ class User(AbstractUser):
     is_verified = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+    objects = UserManager()
 
     def __str__(self):
         return self.username
